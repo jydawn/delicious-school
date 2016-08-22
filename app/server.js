@@ -1,9 +1,10 @@
+/*eslint no-console: "off"*/
 import webpack from 'webpack';
 import webpackConfig from '../webpack.config';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import express from 'express';
-
+import cookieParser from 'cookie-parser';
 import execute from './db/execute';
 import apiRouter from './api/index';
 
@@ -12,6 +13,7 @@ let db = require('./db/connect');
 let bodyParser = require("body-parser");
 
 const app = express();
+app.use(cookieParser());
 const compiler = webpack(webpackConfig);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -31,8 +33,8 @@ app.use(webpackHotMiddleware(compiler, {
 }));
 
 app.use(express.static('./public'));
-app.post('/login', execute.findUser);
-app.post('/init', execute.findDish);
+//app.post('/login', execute.findUser);
+//app.post('/init', execute.findDish);
 app.post('/mealInfo', execute.finsDishInfoById);
 app.post('/saveOrder', execute.saveOrder);
 

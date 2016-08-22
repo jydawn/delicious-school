@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
 import $ from 'jquery';
-
+import request from 'superagent';
 
 export default class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dishes: []
+      dishes: [],
+      username:''
     };
     this.initData();
     this.dishView = this.dishView.bind(this);
@@ -35,14 +36,13 @@ export default class Main extends Component {
       </div>
     );
 
-
     return (
       <div className="container-fluid">
         <div className="main-head">
           <Link to="#" className="logo">Delicious School</Link>
-          <Link to="login" className="main-top">登录</Link>
           <Link to="register" className="main-top">注册</Link>
           <Link to="order" className="main-top">我的订单</Link>
+          <Link to="login" className="main-top">欢迎{this.state.username}</Link>
         </div>
 
         <div id="myCarousel" className="carousel slide">
@@ -84,11 +84,22 @@ export default class Main extends Component {
 
   initData() {
     const self = this;
-    $.post('/init', function (dishes) {
-      self.setState({
-        dishes: dishes
+    request.post('/api/mainpage')
+      .end((err,res) =>{
+        const {username,dishes} = res.body;
+
+        if (err) return alert(err);
+        self.setState({
+          dishes:dishes,
+          username:username
+        });
+
       });
-    });
+    // $.post('/api', function (dishes) {
+    //   self.setState({
+    //     dishes: dishes
+    //   });
+    // });
   }
 
   dishView(id) {
