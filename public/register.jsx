@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import $ from 'jquery';
 import {Link} from 'react-router';
 import request from 'superagent';
 import {checkUsername, checkPassword, checkConfirmPassword} from './register-validate';
@@ -17,7 +16,6 @@ export default class Register extends Component {
       submitButtonEnabled: false
     }
   }
-
   render() {
     return (
       <div className="container-fluid">
@@ -134,16 +132,16 @@ export default class Register extends Component {
       })
       .end((err, res) => {
 
-        if (err) return console.error(err);
-        if (res === 201) {
+        // if (err) return console.error(err);
+        if (res.statusCode === 201) {
           alert("注册成功！");
 
         }
-        if (res === 400) {
+        if (res.statusCode === 400) {
           alert("用户名或密码不正确！");
           return;
         }
-        if (res === 409) {
+        if (res.statusCode === 409) {
           alert("用户名已存在！");
           return;
         }
