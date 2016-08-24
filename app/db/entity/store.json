@@ -1,0 +1,15 @@
+[
+  {
+    "storeName":"1号店" ,
+    "storePhone": "188-2929-1234",
+    "storeLocation":"徐日元",
+    "storeStatus":0
+  },
+
+  {
+    "storeName":"2号店" ,
+    "storePhone": "188-2929-1234",
+    "storeLocation":"徐日元",
+    "storeStatus":0
+  }
+]

@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
-import $ from 'jquery';
 import request from 'superagent';
 
 export default class Main extends Component {
