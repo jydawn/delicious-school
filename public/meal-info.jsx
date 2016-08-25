@@ -49,7 +49,6 @@ export default class MealInfo extends Component {
                 <button onClick={this._addCount.bind(this)}>+</button>
               </h4>
               <button
-                onClick={this.myOrder(dishname, dishprice, storename, storephone, storelocation, this.state.count)}
                 type="button"
                 className="btn btn-primary btn-meal-info">预订
               </button>
