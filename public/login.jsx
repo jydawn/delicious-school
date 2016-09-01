@@ -27,7 +27,7 @@ export default class Login extends Component {
           <div className="col-md-4"></div>
           <div className="col-md-4 login-page">
             <img className="img-responsive center-block picture-head" src="./img/name1.png"/>
-            <form onSubmit={this._onSubmit.bind(this)}>
+            <form>
               <div className="form-group login-user">
                 <input type="text" className="form-control" id="username"
                        placeholder="请输入8位学号"
@@ -70,31 +70,5 @@ export default class Login extends Component {
     this.setState({
       submitButtonEnabled: canSubmit
     });
-  }
-
-  _onSubmit(event) {
-    event.preventDefault();
-    request.post('/api/sessions')
-      .send({
-        username: this.state.username,
-        password: this.state.password
-      })
-      .end((err, res) => {
-        if (err) {
-          if (res.statusCode === 400) {
-            alert("用户名或密码不能为空！");
-            return
-          } else if (res.statusCode === 401) {
-            alert("用户名或密码错误！");
-            return;
-          } else {
-            return alert(err);
-          }
-        }
-        if (res.statusCode === 201) {
-          alert("登录成功！");
-          return hashHistory.push('/main');
-        }
-      });
   }
 }
